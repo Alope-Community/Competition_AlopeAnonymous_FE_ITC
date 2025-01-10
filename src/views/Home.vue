@@ -1,8 +1,8 @@
 <template>
   <!-- hero section -->
-  <section class="mb-10">
+  <section class="">
     <div
-      class="container mx-auto min-h-[600px] flex flex-col lg:flex-row items-center lg:gap-0 gap-8 px-6 md:px-16 lg:px-20 space-y-6 md:space-y-0 md:space-x-10 pt-20"
+      class="container mx-auto min-h-[600px] flex flex-col lg:flex-row items-center lg:gap-0 gap-8 px-6 md:px-16 lg:px-20 space-y-6 md:space-y-0 md:space-x-10"
     >
       <div
         class="lg:w-1/2 w-full lg:order-1 order-2 text-center md:text-left"
@@ -22,18 +22,6 @@
           banyak relawan, dan ciptakan dampak besar bagi generasi cerdas
           Nusantara.
         </p>
-        <div class="flex justify-center md:justify-start space-x-4 mt-6">
-          <button
-            class="bg-[#FFAC00] text-white p-4 rounded-lg hover:bg-orange-600"
-          >
-            <i class="fas fa-user text-2xl"></i>
-          </button>
-          <button
-            class="bg-[#FFAC00] text-white p-4 rounded-lg hover:bg-orange-600"
-          >
-            <i class="fas fa-globe text-2xl"></i>
-          </button>
-        </div>
       </div>
       <div class="lg:w-1/2 w-full lg:order-1">
         <div
@@ -42,9 +30,9 @@
           data-aos-duration="1000"
         >
           <img
-            src="./../assets/image/hero_1.png"
+            src="./../assets/image/hero.png"
             alt="Anak Bahagia"
-            class="w-[450px] max-w-full object-cover rounded-2xl"
+            class="w-[450px] max-w-full object-cover rounded-lg"
           />
         </div>
       </div>
@@ -190,7 +178,7 @@
                 {{ volunteer.title }}
               </h3>
               <RouterLink
-                to="Detail_Program"
+                :to="'/detail_program/' + volunteer.id"
                 class="border border-primary text-primary px-4 py-2 rounded-lg font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300 self-start"
               >
                 Read More

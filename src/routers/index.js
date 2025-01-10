@@ -21,9 +21,10 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: "/detail_program",
+      path: "/detail_program/:id",
       name: "detail_program",
       component: Detail_Program,
+      props: true,
     },
     {
       path: "/list_relawan",

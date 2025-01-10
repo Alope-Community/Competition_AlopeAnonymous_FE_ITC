@@ -58,34 +58,45 @@
 
 <script>
 import axios from "axios";
+
 export default {
+  props: {
+    id: {
+      type: [String, Number],
+      required: true, // Pastikan `id` selalu diterima
+    },
+  },
   data() {
     return {
       isLoadingGetVolunteer: false,
       volunteer: {},
+      error: null, // Untuk menyimpan pesan error jika terjadi
     };
   },
   methods: {
-    getDataVolunteer() {
-      this.isLoadingGetVolunteer = true;
-      axios
-        .get("https://alope.id/api/user/volunteerAPI/1")
-        .then((response) => {
-          if (response) {
-            console.log(response.data.data);
-            this.isLoadingGetVolunteer = false;
-            this.volunteer = response.data.data;
-          }
-        })
-        .catch((error) => {
-          this.isLoadingGetVolunteer = false;
-          console.log("Server error:", error);
-        });
+    async getDataVolunteer() {
+      try {
+        this.isLoadingGetVolunteer = true;
+        this.error = null;
+
+        // Memanggil API dengan ID
+        const response = await axios.get(
+          `https://alope.id/api/user/volunteerAPI/${this.id}`
+        );
+
+        if (response && response.data) {
+          this.volunteer = response.data.data;
+        }
+      } catch (error) {
+        console.error("Server error:", error);
+        this.error = "Gagal mengambil data. Silakan coba lagi.";
+      } finally {
+        this.isLoadingGetVolunteer = false;
+      }
     },
   },
   mounted() {
     this.getDataVolunteer();
-    // this.getDataVolunteers();
   },
 };
 </script>

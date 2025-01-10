@@ -46,17 +46,17 @@
           </div>
 
           <!-- Program Cards Section -->
-          <div class="md:col-span-3 grid grid-cols-1 gap-6 mb-5">
+          <div class="md:col-span-3 grid grid-cols-1 mb-5">
             <!-- Card 1 -->
             <div
-              class="bg-white border border-primary shadow-md rounded-[15px] md:flex overflow-hidden items-center mb-5"
+              class="bg-white border border-primary gap-10 shadow-md rounded-[15px] md:flex overflow-hidden items-center mb-5"
               v-for="(volunteer, index) in volunteers"
               :key="index"
             >
               <img
                 :src="'https://alope.id/storage/' + volunteer.image_url"
                 alt="List_Relawan"
-                class="md:w-1/2 h-50 object-cover"
+                class="md:w-1/2 min-h-52 max-h-52 max-w-80 object-cover"
               />
               <div class="md:w-2/3 p-4">
                 <h2 class="lg:text-2xl text-2xl font-bold text-gray-900 mb-2">
@@ -66,7 +66,7 @@
                   {{ volunteer.description }}
                 </p>
                 <RouterLink
-                  to="Detail_Program"
+                  :to="'/detail_program/' + volunteer.id"
                   class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition"
                 >
                   Daftar Sekarang
