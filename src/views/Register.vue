@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -133,6 +135,21 @@ export default {
       console.log("Name:", this.name);
       console.log("Email:", this.email);
       console.log("Password:", this.password);
+
+      axios
+        .post("https://alope.id/api/user/auth/signup", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          if (response) {
+            console.log(response);
+          }
+        })
+        .catch((error) => {
+          console.log("Server error:", error);
+        });
     },
   },
 };

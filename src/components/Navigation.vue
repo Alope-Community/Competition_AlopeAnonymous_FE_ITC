@@ -1,24 +1,33 @@
 <template>
   <nav
-    class="bg-primary px-6 md:px-16 lg:px-20 text-white p-4 fixed top-0 w-full z-50 shadow-lg"
+    :class="[
+      isScrolled
+        ? 'bg-white bg-opacity-90 backdrop-blur-lg shadow-md'
+        : 'bg-white bg-opacity-100 shadow-none',
+      'transition duration-300 fixed top-0 w-full z-50 px-6 md:px-16 lg:px-20 p-4',
+    ]"
   >
     <div class="container mx-auto flex justify-between items-center">
       <div>
-        <h1 class="text-2xl font-bold font-sekunder">Pijar Nusantara</h1>
+        <h1 class="text-2xl font-bold text-primary">Pijar Nusantara</h1>
       </div>
 
+      <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-4">
-        <button
-          class="w-32 border border-secondary text-secondary font-medium py-2 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-300"
+        <RouterLink
+        to="Login"
+          class="w-32 border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Login
-        </button>
+        </RouterLink>
         <button
-          class="w-32 border border-secondary text-secondary font-medium py-2 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-300"
+          class="w-32 border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Register
         </button>
       </div>
+
+      <!-- Mobile Menu Toggle -->
       <div class="md:hidden">
         <button @click="toggleMenu" class="focus:outline-none">
           <svg
@@ -39,7 +48,15 @@
       </div>
     </div>
 
-    <transition name="slide-fade">
+    <!-- Mobile Menu -->
+    <transition
+      enter-active-class="transition duration-300 ease-in-out"
+      enter-from-class="opacity-0 transform -translate-y-2"
+      enter-to-class="opacity-100 transform translate-y-0"
+      leave-active-class="transition duration-300 ease-in-out"
+      leave-from-class="opacity-100 transform translate-y-0"
+      leave-to-class="opacity-0 transform -translate-y-2"
+    >
       <div
         v-if="menuOpen"
         class="md:hidden bg-primary text-white p-4 space-y-3 border-t border-secondary"
@@ -58,41 +75,29 @@
     </transition>
   </nav>
 </template>
-
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
   data() {
     return {
       menuOpen: false,
+      isScrolled: false,
     };
   },
   methods: {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
+    handleScroll() {
+      this.isScrolled = window.scrollY > 10;
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
-
-<style>
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.3s ease-in-out;
-}
-.slide-fade-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-.slide-fade-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-.slide-fade-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-.slide-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-</style>

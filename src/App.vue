@@ -1,13 +1,17 @@
 <template>
-  <div class="min-w-screen overflow-x-hidden">
-    <User_Navigation v-if="isBackgroundVisible" />
-    <Navigation
-      v-else-if="$route.path !== '/login' && $route.path !== '/register'"
-    />
+  <div class="min-w-screen overflow-x-hidden font-primary">
+    <!-- Navigation -->
+    <template v-if="$route.path !== '/login' && $route.path !== '/register'">
+      <User_Navigation v-if="isUserLoggedIn" />
+      <Navigation v-else />
+    </template>
+
+    <!-- Main Content -->
     <main class="min-w-screen overflow-x-hidden">
       <router-view></router-view>
     </main>
 
+    <!-- Footer -->
     <Footer v-if="$route.path !== '/login' && $route.path !== '/register'" />
   </div>
 </template>
@@ -24,9 +28,10 @@ export default {
     User_Navigation,
   },
   computed: {
-    isBackgroundVisible() {
-      const allowedUrls = ["/"];
-      return allowedUrls.includes(this.$route.path);
+    // Periksa apakah pengguna sudah login
+    isUserLoggedIn() {
+      // Contoh: Periksa state login dari Vuex atau localStorage
+      return !!localStorage.getItem("userToken");
     },
   },
 };

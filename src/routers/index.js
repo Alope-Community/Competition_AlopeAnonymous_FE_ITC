@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import Home from "../views/Home.vue";
 import List_Relawan from "../views/List_Relawan.vue";
 import Detail_Program from "../views/Detail_Program.vue";
+import Detail_Donation from "../views/Detail_Donation.vue";
 import Profile from "../views/profile.vue";
 // auth
 import Login from "../views/Login.vue";
@@ -24,6 +25,12 @@ const router = createRouter({
       path: "/detail_program/:id",
       name: "detail_program",
       component: Detail_Program,
+      props: true,
+    },
+    {
+      path: "/detail_donation/:id",
+      name: "detail_donation",
+      component: Detail_Donation,
       props: true,
     },
     {

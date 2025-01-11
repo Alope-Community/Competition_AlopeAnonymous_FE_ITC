@@ -16,7 +16,7 @@
           Mencerdaskan
           <span class="text-red-500">Nusantara</span>
         </h2>
-        <p class="text-gray-700 mt-4">
+        <p class="text-gray-700 mt-4 font-medium">
           Selamat datang di platform yang menghubungkan komunitas relawan
           mengajar di seluruh Indonesia. Promosikan program Anda, jangkau lebih
           banyak relawan, dan ciptakan dampak besar bagi generasi cerdas
@@ -32,7 +32,7 @@
           <img
             src="./../assets/image/hero.png"
             alt="Anak Bahagia"
-            class="w-[450px] max-w-full object-cover rounded-lg"
+            class="w-[450px] max-w-full object-cover rounded"
           />
         </div>
       </div>
@@ -145,7 +145,7 @@
 
   <!-- program -->
   <section>
-    <div class="container mx-auto px-6 md:mb-16">
+    <div class="container mx-auto px-10 md:mb-16">
       <h2
         class="md:text-4xl text-3xl md:text-left text-center font-bold text-gray-900 mb-12"
       >
@@ -203,7 +203,7 @@
 
   <!-- donasi -->
   <section class="my-16">
-    <div class="container mx-auto px-6 md:mb-16">
+    <div class="container mx-auto px-10 md:mb-16">
       <h2
         class="md:text-4xl text-3xl md:text-left text-center font-bold text-gray-900 mb-12"
       >
@@ -235,11 +235,12 @@
               <h3 class="text-xl font-semibold mb-4">
                 {{ donasion.title }}
               </h3>
-              <button
+              <RouterLink
+                :to="'/detail_donation/' + donasion.id"
                 class="border border-red-500 text-red-500 px-4 py-2 rounded-lg font-bold hover:bg-red-500 hover:text-white transition duration-300 self-start"
               >
                 Read More
-              </button>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -320,7 +321,7 @@
   <!-- end testimoni -->
 
   <!-- FAQ -->
-  <section class="my-16">
+  <section class="mt-16">
     <div
       class="container mx-auto px-6 md:px-16 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
     >

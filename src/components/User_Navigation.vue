@@ -2,14 +2,14 @@
   <nav
     :class="[
       isScrolled
-        ? 'bg-white bg-opacity-100 backdrop-blur text-primary'
-        : 'bg-white text-primary',
-      'transition duration-300 px-6 md:px-16 lg:px-20 p-4 fixed top-0 w-full z-50 shadow-lg',
+        ? 'bg-white bg-opacity-90 backdrop-blur-lg shadow-md text-primary'
+        : 'bg-white bg-opacity-100 shadow-none text-primary',
+      'transition duration-300 fixed top-0 w-full z-50 px-6 md:px-16 lg:px-20 p-4',
     ]"
   >
     <div class="container mx-auto flex items-center justify-between">
       <!-- Brand -->
-      <div class="text-2xl font-bold font-sekunder">Pijar Nusantara</div>
+      <div class="text-2xl font-bold">Pijar Nusantara</div>
 
       <!-- Hamburger Menu (Mobile) -->
       <button class="block md:hidden focus:outline-none" @click="toggleMenu">
