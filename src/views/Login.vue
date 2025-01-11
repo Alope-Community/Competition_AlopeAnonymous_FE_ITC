@@ -1,23 +1,32 @@
 <template>
   <div class="flex min-h-screen items-center justify-center p-4">
-    <!-- Wrapper Card -->
     <div
       class="flex border border-primary flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden"
     >
-      <!-- Bagian Kiri: Gradien -->
       <div
-        class="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-red-500 items-center justify-center p-6"
+        class="hidden md:flex md:w-1/2 items-center justify-center p-6 relative"
       >
-        <h1 class="text-white text-3xl font-bold mb-2 text-center">
-          Login untuk akses program dan komunitas.
+        <img
+          src="./../assets/image/relawan_1.png"
+          alt="Background"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <h1 class="text-white text-3xl font-bold mb-2 text-center z-10">
+          "Gabung untuk program dan komunitas terbaik."
         </h1>
       </div>
 
-      <!-- Bagian Kanan: Form Login -->
       <div class="w-full md:w-1/2 p-6">
+        <button
+          class="flex items-center mb-6 text-primary font-bold hover:text-red-500 transition duration-300"
+          @click="goToHome"
+        >
+          <i class="fas fa-arrow-left mr-2"></i> Kembali
+        </button>
+
         <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
         <form @submit.prevent="handleSubmit">
-          <!-- Input Email -->
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700">
               Email
@@ -28,14 +37,13 @@
                 type="email"
                 id="email"
                 v-model="email"
-                placeholder="Enter your email"
+                placeholder="Email"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Input Password -->
           <div class="mb-4">
             <label
               for="password"
@@ -49,24 +57,23 @@
                 type="password"
                 id="password"
                 v-model="password"
-                placeholder="Enter your password"
+                placeholder="Password"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Tombol Login -->
           <button
             type="submit"
             class="w-full border border-primary text-primary px-4 py-2 mt-4 rounded-md font-bold hover:bg-primary hover:text-white transition duration-300"
           >
-            Login
+            Masuk
           </button>
         </form>
         <p class="mt-4 text-center text-gray-600">
-          Don't have an account?
-          <a href="/register" class="text-blue-500 hover:underline">Sign up</a>
+          Belum Punya Akun?
+          <a href="/register" class="text-blue-500 hover:underline">Daftar</a>
         </p>
       </div>
     </div>
@@ -85,6 +92,9 @@ export default {
     handleSubmit() {
       console.log("Email:", this.email);
       console.log("Password:", this.password);
+    },
+    goToHome() {
+      this.$router.push({ name: "home" });
     },
   },
 };
