@@ -20,6 +20,14 @@
     </div>
     <div class="lg:col-span-2 border border-primary rounded-[15px] shadow-xl">
       <div class="md:my-5 md:mx-10 my-3 mx-5">
+        <button
+          class="flex items-center mb-6 text-primary font-bold hover:text-red-500 transition duration-300"
+          @click="goToHome"
+        >
+          <i class="fas fa-arrow-left mr-2"></i> Kembali
+        </button>
+
+        <!-- Konten Deskripsi -->
         <h1 class="md:text-4xl text-3xl font-bold">{{ donation.title }}</h1>
         <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-primary">
           Deskripsi
@@ -93,6 +101,9 @@ export default {
       } finally {
         this.isLoadingGetDonation = false;
       }
+    },
+    goToHome() {
+      this.$router.push({ name: "home" }); // Navigasi ke halaman home
     },
   },
   mounted() {

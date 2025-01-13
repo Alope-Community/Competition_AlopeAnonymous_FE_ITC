@@ -8,18 +8,20 @@
     ]"
   >
     <div class="container mx-auto flex justify-between items-center">
-      <div class="text-2xl font-bold text-primary"><a href="#home">Pijar Nusantara</a></div>
+      <div class="text-2xl font-bold text-primary">
+        <RouterLink to="/">Pijar Nusantara</RouterLink>
+      </div>
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-4">
         <RouterLink
-          to="login"
+          to="/login"
           class="w-32 flex items-center justify-center border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Login
         </RouterLink>
         <RouterLink
-          to="register"
+          to="/register"
           class="w-32 flex items-center justify-center border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Register
@@ -28,7 +30,11 @@
 
       <!-- Mobile Menu Toggle -->
       <div class="md:hidden">
-        <button @click="toggleMenu" class="focus:outline-none">
+        <button
+          @click="toggleMenu"
+          class="text-primary p-2 focus:outline-none transition duration-300"
+          aria-label="Toggle Menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -58,25 +64,29 @@
     >
       <div
         v-if="menuOpen"
-        class="md:hidden bg-primary text-white p-4 space-y-3 border-t border-secondary"
+        class="md:hidden bg-secondary bg-opacity-10 text-white p-4 space-y-3 border-t border-secondary"
       >
-        <button
-          class="w-full border border-secondary text-secondary font-medium py-2 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-300"
-        >
-          Login
-        </button>
-        <button
-          class="w-full border border-secondary text-secondary font-medium py-2 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-300"
-        >
-          Register
-        </button>
+        <!-- Mobile Buttons: Sejajar ke bawah -->
+        <div class="flex flex-col space-y-4">
+          <RouterLink
+            to="/login"
+            class="w-full border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300 text-center"
+          >
+            Login
+          </RouterLink>
+          <RouterLink
+            to="/register"
+            class="w-full border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300 text-center"
+          >
+            Register
+          </RouterLink>
+        </div>
       </div>
     </transition>
   </nav>
 </template>
-<script>
-import { RouterLink } from "vue-router";
 
+<script>
 export default {
   data() {
     return {
