@@ -246,11 +246,12 @@
         </div>
       </div>
       <div class="text-end mt-12">
-        <button
+        <RouterLink
+          to="List_Donation"
           class="border border-red-500 text-red-500 px-8 py-3 rounded-lg font-bold hover:bg-red-500 hover:text-white transition duration-300"
         >
           Lihat Lebih Banyak <i class="fa-solid fa-arrow-right"></i>
-        </button>
+        </RouterLink>
       </div>
     </div>
   </section>
@@ -398,7 +399,7 @@
             class="w-full text-left px-4 py-3 bg-white font-semibold text-slate-900 flex justify-between items-center"
             @click="toggleAccordion(3)"
           >
-            Apa manfaat bergabung dengan komunitas ini?
+            Apa manfaat menjadi anggota komunitas ini?
             <span
               :class="{ 'rotate-180': activeAccordion === 3 }"
               class="transition-transform duration-300"
@@ -410,8 +411,8 @@
             v-show="activeAccordion === 3"
             class="px-4 py-3 text-gray-700 transition-all duration-300 ease-in-out"
           >
-            Bergabung dengan komunitas ini memberi Anda akses ke sumber daya,
-            pelatihan, dan jaringan yang mendukung misi pendidikan.
+            Anda dapat berkolaborasi dengan anggota lain, berbagi pengalaman,
+            dan mengembangkan jaringan yang mendukung pertumbuhan Anda.
           </div>
         </div>
 
@@ -420,7 +421,7 @@
             class="w-full text-left px-4 py-3 bg-white font-semibold text-slate-900 flex justify-between items-center"
             @click="toggleAccordion(4)"
           >
-            Apa manfaat bergabung dengan komunitas ini?
+            Bagaimana cara bergabung dengan komunitas?
             <span
               :class="{ 'rotate-180': activeAccordion === 4 }"
               class="transition-transform duration-300"
@@ -432,13 +433,14 @@
             v-show="activeAccordion === 4"
             class="px-4 py-3 text-gray-700 transition-all duration-300 ease-in-out"
           >
-            Bergabung dengan komunitas ini memberi Anda akses ke sumber daya,
-            pelatihan, dan jaringan yang mendukung misi pendidikan.
+            Anda dapat bergabung dengan komunitas melalui pendaftaran di situs
+            ini atau menghubungi tim kami untuk informasi lebih lanjut.
           </div>
         </div>
       </div>
     </div>
   </section>
+
   <!-- end FAQ -->
 </template>
 <script>
