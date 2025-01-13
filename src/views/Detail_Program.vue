@@ -46,7 +46,16 @@
             volunteer.contact_phone
           }}</a>
         </div>
+        <RouterLink
+          v-if="isLoggedIn"
+          :to="volunteer.registration_url"
+          class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
+        >
+          Daftar Sekarang
+        </RouterLink>
         <button
+          v-else
+          @click="promptLogin"
           class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
         >
           Daftar Sekarang
@@ -58,19 +67,21 @@
 
 <script>
 import axios from "axios";
+import { RouterLink } from "vue-router";
 
 export default {
   props: {
     id: {
       type: [String, Number],
-      required: true, // Pastikan `id` selalu diterima
+      required: true, 
     },
   },
   data() {
     return {
       isLoadingGetVolunteer: false,
       volunteer: {},
-      error: null, // Untuk menyimpan pesan error jika terjadi
+      error: null,
+      isLoggedIn: false,
     };
   },
   methods: {
@@ -94,9 +105,18 @@ export default {
         this.isLoadingGetVolunteer = false;
       }
     },
+    promptLogin() {
+      alert("Harap login terlebih dahulu untuk mendaftar!");
+      this.$router.push({ name: "login" });
+    },
+    checkLoginStatus() {
+      const token = localStorage.getItem("userToken");
+      this.isLoggedIn = !!token; 
+    },
   },
   mounted() {
     this.getDataVolunteer();
+    this.checkLoginStatus();
   },
 };
 </script>

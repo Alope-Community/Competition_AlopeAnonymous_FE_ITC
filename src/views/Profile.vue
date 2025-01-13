@@ -13,11 +13,13 @@
             <i class="fas fa-user text-primary text-2xl"></i>
           </div>
           <div class="ml-4">
-            <p class="font-medium">Taufan Hidayatul Akbar</p>
-            <p class="text-sm text-gray-600">taufan@gmail.com</p>
+            <p class="font-medium">{{ profile.name }}</p>
+            <p class="text-sm text-gray-600">{{ profile.email }}</p>
           </div>
         </div>
-        <p class="text-sm font-bold text-gray-900">Tanggal Bergabung :</p>
+        <p class="text-sm font-bold text-gray-900">
+          Tanggal Bergabung : {{ profile.created_at }}
+        </p>
       </div>
 
       <!-- Riwayat Program -->
@@ -63,3 +65,43 @@
     </div>
   </div>
 </template>
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      profile: {},
+    };
+  },
+  methods: {
+    getDataProfile() {
+      // Ambil token dari localStorage
+      const token = localStorage.getItem("userToken"); // Ganti "token" dengan nama key yang digunakan saat menyimpan token
+      if (!token) {
+        console.error("Token not found in localStorage");
+        return;
+      }
+
+      // Header dengan Authorization
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .get("https://alope.id/api/user/profile", { headers }) // Tambahkan headers di sini
+        .then((response) => {
+          if (response && response.data) {
+            this.profile = response.data.data;
+          }
+        })
+        .catch((error) => {
+          console.error("Server error:", error);
+        });
+    },
+  },
+  mounted() {
+    this.getDataProfile();
+  },
+};
+</script>

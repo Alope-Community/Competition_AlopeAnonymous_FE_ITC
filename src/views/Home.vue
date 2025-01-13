@@ -1,6 +1,6 @@
 <template>
   <!-- hero section -->
-  <section class="">
+  <section id="home">
     <div
       class="container mx-auto min-h-[600px] flex flex-col lg:flex-row items-center lg:gap-0 gap-8 px-6 md:px-16 lg:px-20 space-y-6 md:space-y-0 md:space-x-10"
     >
@@ -143,8 +143,8 @@
   </section>
   <!-- end visi misi -->
 
-  <!-- program -->
-  <section>
+  <!-- relawan -->
+  <section id="relawan">
     <div class="container mx-auto px-10 md:mb-16">
       <h2
         class="md:text-4xl text-3xl md:text-left text-center font-bold text-gray-900 mb-12"
@@ -199,10 +199,10 @@
       </div>
     </div>
   </section>
-  <!-- end program -->
+  <!-- end relawan -->
 
   <!-- donasi -->
-  <section class="my-16">
+  <section class="my-16" id="donasi">
     <div class="container mx-auto px-10 md:mb-16">
       <h2
         class="md:text-4xl text-3xl md:text-left text-center font-bold text-gray-900 mb-12"

@@ -8,23 +8,22 @@
     ]"
   >
     <div class="container mx-auto flex justify-between items-center">
-      <div>
-        <h1 class="text-2xl font-bold text-primary">Pijar Nusantara</h1>
-      </div>
+      <div class="text-2xl font-bold text-primary"><a href="#home">Pijar Nusantara</a></div>
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-4">
         <RouterLink
-        to="Login"
-          class="w-32 border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
+          to="login"
+          class="w-32 flex items-center justify-center border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Login
         </RouterLink>
-        <button
-          class="w-32 border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
+        <RouterLink
+          to="register"
+          class="w-32 flex items-center justify-center border border-primary text-primary font-medium py-2 px-4 rounded-lg hover:bg-primary hover:text-secondary transition duration-300"
         >
           Register
-        </button>
+        </RouterLink>
       </div>
 
       <!-- Mobile Menu Toggle -->
@@ -76,7 +75,7 @@
   </nav>
 </template>
 <script>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from "vue-router";
 
 export default {
   data() {

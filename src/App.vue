@@ -31,6 +31,7 @@ export default {
     // Periksa apakah pengguna sudah login
     isUserLoggedIn() {
       // Contoh: Periksa state login dari Vuex atau localStorage
+      console.log(localStorage);
       return !!localStorage.getItem("userToken");
     },
   },

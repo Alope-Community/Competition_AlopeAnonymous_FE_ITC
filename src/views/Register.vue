@@ -1,28 +1,37 @@
 <template>
   <div class="flex min-h-screen items-center justify-center p-4">
-    <!-- Wrapper Card -->
     <div
       class="flex border border-primary flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden"
     >
-      <!-- Bagian Kiri: Gradien -->
       <div
-        class="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-red-500 items-center justify-center p-6"
+        class="hidden md:flex md:w-1/2 items-center justify-center p-6 relative"
       >
-        <h1 class="text-white text-3xl font-bold mb-2 text-center">
-          Daftar untuk bergabung dalam komunitas kami.
+        <img
+          src="./../assets/image/relawan_1.png"
+          alt="Background"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <h1 class="text-white text-3xl font-bold mb-2 text-center z-10">
+          Daftar untuk program dan komunitas terbaik.
         </h1>
       </div>
 
-      <!-- Bagian Kanan: Form Register -->
       <div class="w-full md:w-1/2 p-6">
-        <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+        <button
+          class="flex items-center mb-2 text-primary font-bold hover:text-red-500 transition duration-300"
+          @click="goToHome"
+        >
+          <i class="fas fa-arrow-left mr-2"></i> Kembali
+        </button>
+
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-3">
           Register
         </h2>
         <form @submit.prevent="handleSubmit">
-          <!-- Input Nama Lengkap -->
           <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-700">
-              Full Name
+              Nama Lengkap
             </label>
             <div class="relative mt-2">
               <i class="fas fa-user absolute left-3 top-4 text-primary"></i>
@@ -30,14 +39,13 @@
                 type="text"
                 id="name"
                 v-model="name"
-                placeholder="Enter your full name"
+                placeholder="Nama"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Input Email -->
           <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700">
               Email
@@ -48,14 +56,13 @@
                 type="email"
                 id="email"
                 v-model="email"
-                placeholder="Enter your email"
+                placeholder="Email"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Input Password -->
           <div class="mb-4">
             <label
               for="password"
@@ -69,20 +76,19 @@
                 type="password"
                 id="password"
                 v-model="password"
-                placeholder="Enter your password"
+                placeholder="Password"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Input Konfirmasi Password -->
           <div class="mb-4">
             <label
               for="confirmPassword"
               class="block text-sm font-medium text-gray-700"
             >
-              Confirm Password
+              Konfirmasi Password
             </label>
             <div class="relative mt-2">
               <i class="fas fa-lock absolute left-3 top-4 text-primary"></i>
@@ -90,24 +96,23 @@
                 type="password"
                 id="confirmPassword"
                 v-model="confirmPassword"
-                placeholder="Confirm your password"
+                placeholder="Konfirmasi Password"
                 class="pl-10 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
           </div>
 
-          <!-- Tombol Register -->
           <button
             type="submit"
             class="w-full border border-primary text-primary px-4 py-2 mt-4 rounded-md font-bold hover:bg-primary hover:text-white transition duration-300"
           >
-            Register
+            Daftar
           </button>
         </form>
         <p class="mt-4 text-center text-gray-600">
-          Already have an account?
-          <a href="/login" class="text-blue-500 hover:underline">Login</a>
+          Sudah Punya Akun?
+          <a href="/login" class="text-blue-500 hover:underline">Masuk</a>
         </p>
       </div>
     </div>
@@ -137,19 +142,30 @@ export default {
       console.log("Password:", this.password);
 
       axios
-        .post("https://alope.id/api/user/auth/signup", {
-          name: this.name,
-          email: this.email,
-          password: this.password,
+        .get("https://alope.id/api/user/auth/signup", {
+          params: {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          },
         })
         .then((response) => {
           if (response) {
             console.log(response);
+            this.name = "";
+            this.email = "";
+            this.password = "";
+            this.confirmPassword = "";
+
+            this.$router.push({ name: "login" });
           }
         })
         .catch((error) => {
           console.log("Server error:", error);
         });
+    },
+    goToHome() {
+      this.$router.push({ name: "home" });
     },
   },
 };
