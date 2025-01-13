@@ -16,6 +16,12 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <!-- Filter Section -->
           <div class="col-span-1">
+            <button
+              class="flex items-center mb-6 text-primary font-bold hover:text-red-500 transition duration-300"
+              @click="goToHome"
+            >
+              <i class="fas fa-arrow-left mr-2"></i> Kembali
+            </button>
             <div
               class="bg-white border border-red-500 shadow-md p-4 rounded-lg"
             >
@@ -56,8 +62,9 @@
               <img
                 :src="'https://alope.id/storage/' + volunteer.image_url"
                 alt="List_Relawan"
-                class="md:w-1/2 min-h-52 max-h-52 max-w-80 object-cover"
+                class="w-full h-52 md:w-1/2 md:h-52 object-cover"
               />
+
               <div class="md:w-2/3 p-4">
                 <h2 class="lg:text-2xl text-2xl font-bold text-gray-900 mb-2">
                   {{ volunteer.title }}
@@ -109,10 +116,12 @@ export default {
           console.log("Server error:", error);
         });
     },
+    goToHome() {
+      this.$router.push({ name: "home" });
+    },
   },
   mounted() {
     this.getDataVolunteer();
-    // this.getDataVolunteers();
   },
 };
 </script>

@@ -9,7 +9,7 @@
   >
     <div class="container mx-auto flex items-center justify-between">
       <!-- Brand -->
-      <div class="text-2xl font-bold"><a href="#home">Pijar Nusantara</a></div>
+      <div class="text-2xl font-bold">Pijar Nusantara</div>
 
       <button class="block md:hidden focus:outline-none" @click="toggleMenu">
         <i class="fa-solid fa-bars text-xl"></i>
@@ -21,10 +21,10 @@
       >
         <li>
           <a
-            href="#home"
+            href="#about"
             class="font-medium transition duration-300 hover:text-red-500 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full"
           >
-            Home
+            About
           </a>
         </li>
 
@@ -75,7 +75,7 @@
             to="profile"
             class="font-medium transition duration-300 hover:text-red-500 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full"
           >
-            <i class="fa-regular fa-user"></i> Profile
+            User
           </RouterLink>
         </li>
         <li>
@@ -83,7 +83,7 @@
             @click="logout"
             class="font-medium transition duration-300 hover:text-red-500 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full"
           >
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            Logout
           </button>
         </li>
       </ul>

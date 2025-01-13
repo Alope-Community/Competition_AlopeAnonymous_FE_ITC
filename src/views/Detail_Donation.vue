@@ -4,6 +4,7 @@
   >
     <div>
       <div class="border border-red-500 rounded-[15px] shadow-xl">
+
         <img
           :src="'https://alope.id/storage/' + donation.image_url"
           alt=""
