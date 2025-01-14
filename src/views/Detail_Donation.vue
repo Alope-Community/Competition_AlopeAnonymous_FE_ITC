@@ -11,7 +11,7 @@
         />
         <div class="my-7 mx-2 text-center">
           <span
-            class="bg-red-500/20 text-red-500 font-semibold px-5 py-3 rounded text-lg mx-1 mb-2 inline-block"
+            class="bg-primary/20 text-primary font-semibold px-5 py-3 rounded text-lg mx-1 mb-2 inline-block"
           >
             {{ donation.category }}
           </span>
@@ -48,13 +48,22 @@
         </div>
         <div class="flex items-center my-3 gap-3">
           <i
-            class="fa-solid fa-phone md:text-3xl text-xl rounded-lg p-2 text-primary"
+            class="fa-solid fa-globe md:text-3xl text-xl rounded-lg p-2 text-primary"
           ></i>
-          <a href="" class="text-xl text-red-500">{{
-            donation.contact_phone
-          }}</a>
+          <p href="" class="text-xl text-red-500">{{
+            donation.web_url
+          }}</p>
         </div>
+        <RouterLink
+          v-if="isLoggedIn"
+          :to="donation.donation_url"
+          class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
+        >
+          Daftar Sekarang
+        </RouterLink>
         <button
+          v-else
+          @click="promptLogin"
           class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
         >
           Daftar Sekarang
@@ -66,7 +75,7 @@
 
 <script>
 import axios from "axios";
-
+import { RouterLink } from "vue-router";
 export default {
   props: {
     id: {
@@ -78,6 +87,7 @@ export default {
     return {
       isLoadingGetDonation: false,
       donation: {},
+      isLoggedIn: false, // Tambahkan properti untuk status login
       error: null, // Untuk menyimpan pesan error jika terjadi
     };
   },
@@ -102,12 +112,24 @@ export default {
         this.isLoadingGetDonation = false;
       }
     },
+    checkLoginStatus() {
+      // Periksa apakah token ada di localStorage
+      const token = localStorage.getItem("userToken");
+      this.isLoggedIn = !!token; // Mengatur status login berdasarkan token
+    },
     goToHome() {
       this.$router.push({ name: "home" }); // Navigasi ke halaman home
     },
+    promptLogin() {
+      // Tampilkan notifikasi atau arahkan ke halaman login
+      alert("Anda harus login untuk mendaftar.");
+      this.$router.push({ name: "login" }); // Arahkan ke halaman login
+    },
   },
   mounted() {
+    this.checkLoginStatus(); // Cek status login saat komponen dimuat
     this.getDataDonation();
+    window.scrollTo(0, 0);
   },
 };
 </script>

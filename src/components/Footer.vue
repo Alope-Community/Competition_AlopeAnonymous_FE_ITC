@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-20 bg-primary text-secondary font-primary">
+  <footer class="mt-7 bg-primary text-secondary font-primary">
     <div
       class="grid grid-cols-1 md:grid-cols-7 gap-5 mx-6 md:mx-16 text-secondary"
     >

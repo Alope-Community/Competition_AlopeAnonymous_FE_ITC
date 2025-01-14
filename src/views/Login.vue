@@ -75,6 +75,10 @@
           Belum Punya Akun?
           <a href="/register" class="text-blue-500 hover:underline">Daftar</a>
         </p>
+        <p class="mt-2 text-center text-gray-600">
+          Login Sebagai Komunitas
+          <a href="https://alope.id/login" class="text-blue-500 hover:underline">Login Komunitas</a>
+        </p>
       </div>
     </div>
   </div>
