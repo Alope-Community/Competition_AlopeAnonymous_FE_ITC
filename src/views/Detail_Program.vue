@@ -21,7 +21,7 @@
     <div class="lg:col-span-2 border border-primary rounded-[15px] shadow-xl">
       <div class="md:my-5 md:mx-10 my-3 mx-5">
         <button
-          class="flex items-center mb-6 text-primary font-bold hover:text-red-500 transition duration-300"
+          class="flex items-center mb-6 text-red-500 font-bold hover:text-primary transition duration-300"
           @click="goToHome"
         >
           <i class="fas fa-arrow-left mr-2"></i> Kembali
@@ -29,42 +29,54 @@
 
         <!-- Deskripsi Program -->
         <h1 class="md:text-4xl text-3xl font-bold">{{ volunteer.title }}</h1>
-        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-primary">
+        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-red-500">
           Deskripsi
         </h2>
         <p class="text-gray-700 my-5 text-lg">
           {{ volunteer.description }}
         </p>
-        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-primary">
+        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-red-500">
+          Waktu
+        </h2>
+        <div class="flex items-center my-3 gap-3">
+          <i
+            class="fa-regular fa-calendar-days md:text-2xl text-lg rounded-lg p-2 text-gray-700"
+          ></i>
+          <p href="" class="text-lg text-gray-700">
+            {{ formatDate(volunteer.start_date) }} <span> - </span>
+            {{ formatDate(volunteer.end_date) }}
+          </p>
+        </div>
+        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-red-500">
           Contact Us
         </h2>
         <div class="flex items-center my-3 gap-3">
           <i
-            class="fa-brands fa-instagram md:text-3xl text-xl rounded-lg p-2 text-primary"
+            class="fa-brands fa-instagram md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
-          <a href="" class="text-xl text-red-500">{{
-            volunteer.contact_instagram
-          }}</a>
+          <p href="" class="text-lg text-gray-700">
+            {{ volunteer.contact_instagram }}
+          </p>
         </div>
         <div class="flex items-center my-3 gap-3">
           <i
-            class="fa-solid fa-phone md:text-3xl text-xl rounded-lg p-2 text-primary"
+            class="fa-solid fa-phone md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
-          <a href="" class="text-xl text-red-500">{{
-            volunteer.contact_phone
-          }}</a>
+          <p href="" class="text-lg text-gray-700">
+            {{ volunteer.contact_phone }}
+          </p>
         </div>
         <RouterLink
           v-if="isLoggedIn"
           :to="volunteer.registration_url"
-          class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
+          class="border border-red-500 text-red-500 px-4 py-2 mt-4 rounded-md font-bold hover:bg-red-500 hover:text-white transition duration-300"
         >
           Daftar Sekarang
         </RouterLink>
         <button
           v-else
           @click="promptLogin"
-          class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
+          class="border border-red-500 text-red-500 px-4 py-2 mt-4 rounded-md font-bold hover:bg-red-500 hover:text-white transition duration-300"
         >
           Daftar Sekarang
         </button>
@@ -76,6 +88,7 @@
 <script>
 import axios from "axios";
 import { RouterLink } from "vue-router";
+import moment from "moment";
 
 export default {
   props: {
@@ -93,6 +106,9 @@ export default {
     };
   },
   methods: {
+    formatDate(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
     async getDataVolunteer() {
       try {
         this.isLoadingGetVolunteer = true;
@@ -128,6 +144,7 @@ export default {
   mounted() {
     this.getDataVolunteer();
     this.checkLoginStatus();
+    window.scrollTo(0, 0);
   },
 };
 </script>

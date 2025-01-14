@@ -25,14 +25,14 @@
       </div>
       <div class="lg:w-1/2 w-full lg:order-1">
         <div
-          class="relative w-full flex lg:justify-end justify-center"
+          class="relative w-full flex lg:justify-end mt-10 justify-center"
           data-aos="fade-left"
           data-aos-duration="1000"
         >
           <img
             src="./../assets/image/hero.png"
             alt="Anak Bahagia"
-            class="w-[450px] max-w-full object-cover rounded"
+            class="w-[450px] sm:pt-2 pt-14 max-w-full object-cover rounded"
           />
         </div>
       </div>
@@ -355,7 +355,7 @@
             class="w-full text-left px-4 py-3 bg-white font-semibold text-slate-900 flex justify-between items-center"
             @click="toggleAccordion(1)"
           >
-            Apa itu FAQ?
+            Apa itu program nusantara
             <span
               :class="{ 'rotate-180': activeAccordion === 1 }"
               class="transition-transform duration-300"
@@ -367,8 +367,10 @@
             v-show="activeAccordion === 1"
             class="px-4 py-3 text-gray-700 transition-all duration-300 ease-in-out"
           >
-            FAQ adalah daftar pertanyaan yang sering diajukan, dirancang untuk
-            membantu Anda menemukan informasi penting dengan mudah.
+            Pijar Nusantara adalah sebuah platform digital yang dirancang untuk
+            membantu komunitas di bidang pendidikan mempromosikan program mereka
+            dan menjangkau relawan yang bersedia berkontribusi dalam memajukan
+            pendidikan di Indonesia.
           </div>
         </div>
 
@@ -435,6 +437,28 @@
           >
             Anda dapat bergabung dengan komunitas melalui pendaftaran di situs
             ini atau menghubungi tim kami untuk informasi lebih lanjut.
+          </div>
+        </div>
+        <div class="border border-gray-300 rounded-lg shadow-md">
+          <button
+            class="w-full text-left px-4 py-3 bg-white font-semibold text-slate-900 flex justify-between items-center"
+            @click="toggleAccordion(5)"
+          >
+            Apakah layanan Pijar Nusantara berbayar?
+            <span
+              :class="{ 'rotate-180': activeAccordion === 5 }"
+              class="transition-transform duration-300"
+            >
+              +
+            </span>
+          </button>
+          <div
+            v-show="activeAccordion === 5"
+            class="px-4 py-3 text-gray-700 transition-all duration-300 ease-in-out"
+          >
+            Tidak, layanan Pijar Nusantara sepenuhnya gratis untuk komunitas
+            maupun relawan, sehingga semua pihak dapat berfokus pada tujuan
+            bersama untuk memajukan pendidikan di Indonesia.
           </div>
         </div>
       </div>
@@ -534,6 +558,7 @@ export default {
     this.getDataVolunteers();
     this.getDataDonsasions();
     this.getDataTestimoni();
+    window.scrollTo(0, 0);
   },
 };
 </script>

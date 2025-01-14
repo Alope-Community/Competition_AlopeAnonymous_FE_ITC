@@ -38,16 +38,6 @@
                   ></i>
                 </div>
               </div>
-              <div>
-                <select
-                  id="sort"
-                  class="w-full border bg-white border-red-500 rounded-lg p-2 focus:ring-red-500 focus:border-red-500"
-                >
-                  <option>Paling Populer</option>
-                  <option>Terbaru</option>
-                  <option>Terdekat</option>
-                </select>
-              </div>
             </div>
           </div>
 
@@ -56,23 +46,23 @@
             <!-- Card 1 -->
             <div
               class="bg-white border border-primary gap-10 shadow-md rounded-[15px] md:flex overflow-hidden items-center mb-5"
-              v-for="(volunteer, index) in volunteers"
+              v-for="(donation, index) in donations"
               :key="index"
             >
               <img
-                :src="'https://alope.id/storage/' + volunteer.image_url"
+                :src="'https://alope.id/storage/' + donation.image_url"
                 alt="List_Relawan"
-                class="w-full h-52 md:w-1/2 md:h-52 object-cover"
+                class="md:w-1/2 md:max-w-88 md:min-w-44 w-full max-h-52 min-h-52 object-cover"
               />
               <div class="md:w-2/3 p-4">
                 <h2 class="lg:text-2xl text-2xl font-bold text-gray-900 mb-2">
-                  {{ volunteer.title }}
+                  {{ donation.title }}
                 </h2>
                 <p class="text-md text-gray-600 mb-7">
-                  {{ volunteer.description }}
+                  {{ donation.description }}
                 </p>
                 <RouterLink
-                  :to="'/detail_program/' + volunteer.id"
+                  :to="'/detail_donation/' + donation.id"
                   class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition"
                 >
                   Daftar Sekarang
@@ -94,24 +84,24 @@ import axios from "axios";
 export default {
   data() {
     return {
-      isLoadingGetVolunteer: false,
-      volunteers: [],
+      isLoadingGetDonation: false,
+      donations: [],
     };
   },
   methods: {
-    getDataVolunteer() {
-      this.isLoadingGetVolunteer = true;
+    getDataDonation() {
+      this.isLoadingGetDonation = true;
       axios
-        .get("https://alope.id/api/user/volunteerAPI")
+        .get("https://alope.id/api/user/donationAPI")
         .then((response) => {
           if (response) {
             console.log(response.data.data);
-            this.isLoadingGetVolunteer = false;
-            this.volunteers = response.data.data;
+            this.isLoadingGetDonation = false;
+            this.donations = response.data.data;
           }
         })
         .catch((error) => {
-          this.isLoadingGetVolunteer = false;
+          this.isLoadingGetDonation = false;
           console.log("Server error:", error);
         });
     },
@@ -120,7 +110,8 @@ export default {
     },
   },
   mounted() {
-    this.getDataVolunteer();
+    this.getDataDonation();
+    window.scrollTo(0, 0);
     // this.getDataVolunteers();
   },
 };

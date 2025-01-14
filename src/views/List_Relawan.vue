@@ -16,12 +16,6 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <!-- Filter Section -->
           <div class="col-span-1">
-            <button
-              class="flex items-center mb-6 text-primary font-bold hover:text-red-500 transition duration-300"
-              @click="goToHome"
-            >
-              <i class="fas fa-arrow-left mr-2"></i> Kembali
-            </button>
             <div
               class="bg-white border border-red-500 shadow-md p-4 rounded-lg"
             >
@@ -44,16 +38,6 @@
                   ></i>
                 </div>
               </div>
-              <div>
-                <select
-                  id="sort"
-                  class="w-full border bg-white border-red-500 rounded-lg p-2 focus:ring-red-500 focus:border-red-500"
-                >
-                  <option>Paling Populer</option>
-                  <option>Terbaru</option>
-                  <option>Terdekat</option>
-                </select>
-              </div>
             </div>
           </div>
 
@@ -68,7 +52,7 @@
               <img
                 :src="'https://alope.id/storage/' + volunteer.image_url"
                 alt="List_Relawan"
-                class="w-full h-52 md:w-1/2 md:h-52 object-cover"
+                class="md:w-1/2 md:max-w-88 md:min-w-44 w-full max-h-52 min-h-52 object-cover"
               />
 
               <div class="md:w-2/3 p-4">
@@ -128,6 +112,7 @@ export default {
   },
   mounted() {
     this.getDataVolunteer();
+    window.scrollTo(0, 0);
   },
 };
 </script>
