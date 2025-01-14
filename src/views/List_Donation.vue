@@ -5,7 +5,7 @@
       <div class="container mx-auto px-10 pt-32 text-center">
         <h1 class="text-white text-4xl font-bold mb-8">
           Temukan Lebih Banyak <br />
-          Program Donasi Program Donasi
+          Program Donasi
         </h1>
       </div>
     </div>

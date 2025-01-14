@@ -322,7 +322,7 @@
   <!-- end testimoni -->
 
   <!-- FAQ -->
-  <section class="mt-16">
+  <section id="faq" class="mt-16">
     <div
       class="container mx-auto px-6 md:px-16 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
     >
