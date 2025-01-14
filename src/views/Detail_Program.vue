@@ -50,7 +50,7 @@
         <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-red-500">
           Contact Us
         </h2>
-        <div class="flex items-center my-3 gap-3">
+        <div class="flex items-center mt-2 gap-3">
           <i
             class="fa-brands fa-instagram md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
@@ -58,7 +58,7 @@
             {{ volunteer.contact_instagram }}
           </p>
         </div>
-        <div class="flex items-center my-3 gap-3">
+        <div class="flex items-center mb-3 gap-3">
           <i
             class="fa-solid fa-phone md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>

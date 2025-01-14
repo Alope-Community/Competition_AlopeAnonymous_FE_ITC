@@ -40,16 +40,6 @@
                   ></i>
                 </div>
               </div>
-              <div>
-                <select
-                  id="sort"
-                  class="w-full border bg-white border-red-500 rounded-lg p-2 focus:ring-red-500 focus:border-red-500"
-                >
-                  <option>Paling Populer</option>
-                  <option>Terbaru</option>
-                  <option>Terdekat</option>
-                </select>
-              </div>
             </div>
           </div>
 
@@ -70,7 +60,7 @@
                   {{ volunteer.title }}
                 </h2>
                 <p class="text-md text-gray-600 mb-7">
-                  {{ volunteer.description }}
+                  {{ truncateDescription(volunteer.description) }}
                 </p>
                 <RouterLink
                   :to="'/detail_program/' + volunteer.id"
@@ -100,6 +90,13 @@ export default {
     };
   },
   methods: {
+    truncateDescription(description) {
+      const words = description.split(" ");
+      if (words.length > 10) {
+        return words.slice(0, 10).join(" ") + "...";
+      }
+      return description;
+    },
     // Fetch volunteers from the API
     getDataVolunteer() {
       this.isLoadingGetVolunteer = true;

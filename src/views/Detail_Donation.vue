@@ -7,7 +7,7 @@
         <img
           :src="'https://alope.id/storage/' + donation.image_url"
           alt=""
-          class="w-full"
+          class="w-full rounded-[15px]"
         />
         <div class="my-7 mx-2 text-center">
           <span
@@ -36,27 +36,37 @@
           {{ donation.description }}
         </p>
         <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-primary">
-          Contact Us
+          Waktu
         </h2>
         <div class="flex items-center my-3 gap-3">
           <i
-            class="fa-brands fa-instagram md:text-3xl text-xl rounded-lg p-2 text-primary"
+            class="fa-regular fa-calendar-days md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
-          <a href="" class="text-xl text-red-500">{{
-            donation.contact_instagram
-          }}</a>
+          <p href="" class="text-lg text-gray-700">
+            {{ formatDate(donation.start_date) }} <span> - </span>
+            {{ formatDate(donation.end_date) }}
+          </p>
         </div>
-        <div class="flex items-center my-3 gap-3">
+        <h2 class="md:text-3xl text-2xl font-semibold mt-5 text-primary">
+          Contact Us
+        </h2>
+        <div class="flex items-center mt-2 gap-3">
           <i
-            class="fa-solid fa-globe md:text-3xl text-xl rounded-lg p-2 text-primary"
+            class="fa-solid fa-link md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
-          <p href="" class="text-xl text-red-500">{{
-            donation.web_url
-          }}</p>
+          <p href="" class="text-lg text-red-500">
+            {{ donation.donation_url }}
+          </p>
+        </div>
+        <div class="flex items-center mb-5 gap-3">
+          <i
+            class="fa-solid fa-globe md:text-2xl text-lg rounded-lg p-2 text-gray-700"
+          ></i>
+          <p href="" class="text-lg text-red-500">{{ donation.web_url }}</p>
         </div>
         <RouterLink
           v-if="isLoggedIn"
-          :to="donation.donation_url"
+          :to="donation.donation_url" 
           class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
         >
           Daftar Sekarang
@@ -76,6 +86,7 @@
 <script>
 import axios from "axios";
 import { RouterLink } from "vue-router";
+import moment from "moment";
 export default {
   props: {
     id: {
@@ -92,6 +103,9 @@ export default {
     };
   },
   methods: {
+    formatDate(date) {
+      return moment(date).format("DD MMMM YYYY");
+    },
     async getDataDonation() {
       try {
         this.isLoadingGetDonation = true;

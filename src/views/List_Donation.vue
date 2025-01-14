@@ -5,7 +5,7 @@
       <div class="container mx-auto px-10 pt-32 text-center">
         <h1 class="text-white text-4xl font-bold mb-8">
           Temukan Lebih Banyak <br />
-          Program Donasi
+          Program Donasi Program Donasi
         </h1>
       </div>
     </div>
@@ -61,7 +61,7 @@
                   {{ donation.title }}
                 </h2>
                 <p class="text-md text-gray-600 mb-7">
-                  {{ donation.description }}
+                  {{ truncateDescription(donation.description) }}
                 </p>
                 <RouterLink
                   :to="'/detail_donation/' + donation.id"
@@ -91,6 +91,13 @@ export default {
     };
   },
   methods: {
+    truncateDescription(description) {
+      const words = description.split(" ");
+      if (words.length > 10) {
+        return words.slice(0, 10).join(" ") + "...";
+      }
+      return description;
+    },
     // Method to fetch donations from the API
     getDataDonation() {
       this.isLoadingGetDonation = true;
