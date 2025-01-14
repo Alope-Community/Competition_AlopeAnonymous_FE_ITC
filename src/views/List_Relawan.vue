@@ -53,7 +53,7 @@
               <img
                 :src="'https://alope.id/storage/' + volunteer.image_url"
                 alt="List_Relawan"
-                class="md:w-1/2 min-h-52 max-h-52 max-w-80 object-cover"
+                class="md:w-1/2 md:max-w-88 md:min-w-44 w-full max-h-52 min-h-52 object-cover"
               />
               <div class="md:w-2/3 p-4">
                 <h2 class="lg:text-2xl text-2xl font-bold text-gray-900 mb-2">
@@ -92,11 +92,13 @@ export default {
   methods: {
     truncateDescription(description) {
       const words = description.split(" ");
-      if (words.length > 10) {
-        return words.slice(0, 10).join(" ") + "...";
+      const isMobileOrTablet = window.innerWidth <= 768; // Ukuran layar untuk tablet dan ponsel
+      const maxWords = isMobileOrTablet ? 5 : 10; // Maksimal kata untuk mobile/tablet dan desktop
+      if (words.length > maxWords) {
+        return words.slice(0, maxWords).join(" ") + "...";
       }
       return description;
-    },
+    },  
     // Fetch volunteers from the API
     getDataVolunteer() {
       this.isLoadingGetVolunteer = true;

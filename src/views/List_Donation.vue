@@ -67,7 +67,7 @@
                   :to="'/detail_donation/' + donation.id"
                   class="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition"
                 >
-                  Daftar Sekarang
+                  Donasi Sekarang
                 </RouterLink>
               </div>
             </div>

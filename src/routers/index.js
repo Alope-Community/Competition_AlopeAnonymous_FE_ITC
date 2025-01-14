@@ -9,7 +9,7 @@ import List_Relawan from "../views/List_Relawan.vue";
 import List_Donation from "../views/List_Donation.vue";
 import Detail_Program from "../views/Detail_Program.vue";
 import Detail_Donation from "../views/Detail_Donation.vue";
-import Profile from "../views/profile.vue";
+import Profile from "../views/Profile.vue";
 // auth
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";

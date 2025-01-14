@@ -66,13 +66,13 @@
             {{ volunteer.contact_phone }}
           </p>
         </div>
-        <RouterLink
+        <button
           v-if="isLoggedIn"
-          :to="volunteer.registration_url"
+          @click="getDaftarVolunteer"
           class="border border-red-500 text-red-500 px-4 py-2 mt-4 rounded-md font-bold hover:bg-red-500 hover:text-white transition duration-300"
         >
           Daftar Sekarang
-        </RouterLink>
+        </button>
         <button
           v-else
           @click="promptLogin"
@@ -89,6 +89,7 @@
 import axios from "axios";
 import { RouterLink } from "vue-router";
 import moment from "moment";
+import { data } from "autoprefixer";
 
 export default {
   props: {
@@ -103,9 +104,66 @@ export default {
       volunteer: {},
       error: null,
       isLoggedIn: false,
+      idUser: 0,
     };
   },
   methods: {
+    getDaftarVolunteer() {
+      const token = localStorage.getItem("userToken");
+      if (!token) {
+        console.error("Token not found in localStorage");
+        return;
+      }
+
+      // Header dengan Authorization
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .post(
+          "https://alope.id/api/user/volunteerAPI/register",
+          {
+            volunteer_id: this.id,
+          },
+          { headers }
+        )
+        .then((response) => {
+          this.$router.push({ name: "profile" });
+          window.open(this.volunteer.registration_url, "_blank");
+
+          console.log(this.volunteer.registration_url); 
+        })
+        .catch((error) => {
+          console.error("Server error:", error);
+        });
+    },
+
+    getDataProfile() {
+      // Ambil token dari localStorage
+      const token = localStorage.getItem("userToken"); // Ganti "token" dengan nama key yang digunakan saat menyimpan token
+      if (!token) {
+        console.error("Token not found in localStorage");
+        return;
+      }
+
+      // Header dengan Authorization
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .get("https://alope.id/api/user/profile", { headers }) // Tambahkan headers di sini
+        .then((response) => {
+          if (response && response.data) {
+            this.idUser = response.data.data.id;
+            console.log(this.idUser);
+          }
+        })
+        .catch((error) => {
+          console.error("Server error:", error);
+        });
+    },
     formatDate(date) {
       return moment(date).format("DD MMMM YYYY");
     },
@@ -121,6 +179,7 @@ export default {
 
         if (response && response.data) {
           this.volunteer = response.data.data;
+          console.log(this.id);
         }
       } catch (error) {
         console.error("Server error:", error);
@@ -144,6 +203,7 @@ export default {
   mounted() {
     this.getDataVolunteer();
     this.checkLoginStatus();
+    this.getDataProfile();
     window.scrollTo(0, 0);
   },
 };

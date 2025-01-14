@@ -52,7 +52,7 @@
         </h2>
         <div class="flex items-center mt-2 gap-3">
           <i
-            class="fa-solid fa-link md:text-2xl text-lg rounded-lg p-2 text-gray-700"
+            class="fa-solid fa-landmark md:text-2xl text-lg rounded-lg p-2 text-gray-700"
           ></i>
           <p href="" class="text-lg text-red-500">
             {{ donation.donation_url }}
@@ -64,19 +64,19 @@
           ></i>
           <p href="" class="text-lg text-red-500">{{ donation.web_url }}</p>
         </div>
-        <RouterLink
+        <button
           v-if="isLoggedIn"
-          :to="donation.donation_url" 
+          @click="getDaftarDonasi"
           class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
         >
-          Daftar Sekarang
-        </RouterLink>
+          Donasi Sekarang
+        </button>
         <button
           v-else
           @click="promptLogin"
           class="border border-[#FFAC00] text-[#FFAC00] px-4 py-2 mt-4 rounded-md font-bold hover:bg-[#FFAC00] hover:text-white transition duration-300"
         >
-          Daftar Sekarang
+          Donasi Sekarang
         </button>
       </div>
     </div>
@@ -103,6 +103,60 @@ export default {
     };
   },
   methods: {
+    getDaftarDonasi() {
+      const token = localStorage.getItem("userToken");
+      if (!token) {
+        console.error("Token not found in localStorage");
+        return;
+      }
+
+      // Header dengan Authorization
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .post(
+          "https://alope.id/api/user/donationAPI/register",
+          {
+            donation_id: this.id,
+          },
+          { headers }
+        )
+        .then((response) => {
+          this.$router.push({ name: "profile" });
+          window.open(this.donation.registration_url, "_blank");
+        })
+        .catch((error) => {
+          console.error("Server error:", error);
+        });
+    },
+
+    getDataProfile() {
+      // Ambil token dari localStorage
+      const token = localStorage.getItem("userToken"); // Ganti "token" dengan nama key yang digunakan saat menyimpan token
+      if (!token) {
+        console.error("Token not found in localStorage");
+        return;
+      }
+
+      // Header dengan Authorization
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .get("https://alope.id/api/user/profile", { headers }) // Tambahkan headers di sini
+        .then((response) => {
+          if (response && response.data) {
+            this.idUser = response.data.data.id;
+            console.log(this.idUser);
+          }
+        })
+        .catch((error) => {
+          console.error("Server error:", error);
+        });
+    },
     formatDate(date) {
       return moment(date).format("DD MMMM YYYY");
     },
@@ -142,6 +196,7 @@ export default {
   },
   mounted() {
     this.checkLoginStatus(); // Cek status login saat komponen dimuat
+    this.getDataDonation();
     this.getDataDonation();
     window.scrollTo(0, 0);
   },
