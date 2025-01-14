@@ -175,7 +175,7 @@
             />
             <div class="lg:p-6 p-4 flex flex-col">
               <h3 class="text-xl font-semibold mb-4">
-                {{ volunteer.title }}
+                {{ truncateDescription(volunteer.title) }}
               </h3>
               <RouterLink
                 :to="'/detail_program/' + volunteer.id"
@@ -233,7 +233,7 @@
             />
             <div class="lg:p-6 p-4 flex flex-col">
               <h3 class="text-xl font-semibold mb-4">
-                {{ donasion.title }}
+                {{ truncateDescription(donasion.title) }}
               </h3>
               <RouterLink
                 :to="'/detail_donation/' + donasion.id"
@@ -487,6 +487,13 @@ export default {
     };
   },
   methods: {
+    truncateDescription(description) {
+      const words = description.split(" ");
+      if (words.length > 3) {
+        return words.slice(0, 3).join(" ") + "...";
+      }
+      return description;
+    },
     toggleAccordion(id) {
       this.activeAccordion = this.activeAccordion === id ? null : id;
     },
