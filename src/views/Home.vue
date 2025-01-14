@@ -40,7 +40,7 @@
   </section>
   <!-- end hero -->
 
-  <!-- quetes -->
+  <!-- quotes -->
   <section>
     <div class="bg-gradient-to-r from-primary to-red-500 text-white py-10">
       <div class="container mx-auto px-10 pt-10 text-center">
