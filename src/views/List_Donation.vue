@@ -5,7 +5,7 @@
       <div class="container mx-auto px-10 pt-32 text-center">
         <h1 class="text-white text-4xl font-bold mb-8">
           Temukan Lebih Banyak <br />
-          Program Relawan
+          Program Donasi
         </h1>
       </div>
     </div>
@@ -29,6 +29,8 @@
                 <div class="relative">
                   <input
                     type="text"
+                    v-model="searchQuery"
+                    @input="searchDonations"
                     id="search"
                     placeholder="Cari program"
                     class="w-full border border-red-500 rounded-lg p-2 focus:ring-red-500 focus:border-red-500"
@@ -75,20 +77,21 @@
     </div>
   </section>
 </template>
+
 <script>
-// let text = "How are you doing today?";
-// const myArray = text.split(" ");
-// let word = myArray[1];
 import { RouterLink } from "vue-router";
 import axios from "axios";
+
 export default {
   data() {
     return {
-      isLoadingGetDonation: false,
-      donations: [],
+      searchQuery: "", // For storing the search input
+      donations: [], // Store donations
+      isLoadingGetDonation: false, // Loading state for donations
     };
   },
   methods: {
+    // Method to fetch donations from the API
     getDataDonation() {
       this.isLoadingGetDonation = true;
       axios
@@ -105,14 +108,37 @@ export default {
           console.log("Server error:", error);
         });
     },
+
+    // Method to search donations based on the query
+    searchDonations() {
+      if (this.searchQuery.length > 2) {
+        this.isLoadingGetDonation = true;
+        axios
+          .get("https://alope.id/api/user/donation/searchAPI", {
+            params: { keyword: this.searchQuery },
+          })
+          .then((response) => {
+            this.isLoadingGetDonation = false;
+            this.donations = response.data.data;
+          })
+          .catch((error) => {
+            this.isLoadingGetDonation = false;
+            console.log("Server error during search:", error);
+          });
+      } else {
+        // Reset the donations if the search query is too short
+        this.getDataDonation();
+      }
+    },
+
+    // Method to navigate back to the home page
     goToHome() {
       this.$router.push({ name: "home" });
     },
   },
   mounted() {
-    this.getDataDonation();
+    this.getDataDonation(); // Fetch the data on mount
     window.scrollTo(0, 0);
-    // this.getDataVolunteers();
   },
 };
 </script>
